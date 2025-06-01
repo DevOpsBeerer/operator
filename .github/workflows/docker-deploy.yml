@@ -36,8 +36,8 @@ jobs:
           push: false
           tags: security-scan:latest
           platforms: linux/amd64
-          cache-from: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache
-          cache-to: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           outputs: type=docker
 
       - name: Run Trivy vulnerability scanner
@@ -100,8 +100,8 @@ jobs:
         with:
           context: .
           platforms: linux/amd64
-          cache-from: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache
-          cache-to: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
