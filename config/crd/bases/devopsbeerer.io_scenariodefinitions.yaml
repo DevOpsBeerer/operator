@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-  name: scenariodefinitions.devopsbeerer.io
+  name: scenariodefinitions.devopsbeerer.ch
 spec:
-  group: devopsbeerer.io
+  group: devopsbeerer.ch
   names:
     kind: ScenarioDefinition
     listKind: ScenarioDefinitionList

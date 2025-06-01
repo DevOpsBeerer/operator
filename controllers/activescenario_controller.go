@@ -33,12 +33,12 @@ type ActiveScenarioReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=devopsbeerer.io,resources=activescenarios,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=devopsbeerer.io,resources=activescenarios/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=devopsbeerer.io,resources=activescenarios/finalizers,verbs=update
-//+kubebuilder:rbac:groups=devopsbeerer.io,resources=scenariodefinitions,verbs=get;list;watch
-//+kubebuilder:rbac:groups=devopsbeerer.io,resources=scenariohistories,verbs=get;list;watch;create;update;patch
-//+kubebuilder:rbac:groups=devopsbeerer.io,resources=scenariohistories/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=devopsbeerer.ch,resources=activescenarios,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=devopsbeerer.ch,resources=activescenarios/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=devopsbeerer.ch,resources=activescenarios/finalizers,verbs=update
+//+kubebuilder:rbac:groups=devopsbeerer.ch,resources=scenariodefinitions,verbs=get;list;watch
+//+kubebuilder:rbac:groups=devopsbeerer.ch,resources=scenariohistories,verbs=get;list;watch;create;update;patch
+//+kubebuilder:rbac:groups=devopsbeerer.ch,resources=scenariohistories/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups="",resources=namespaces,verbs=get;list;watch;create;delete
 //+kubebuilder:rbac:groups="*",resources="*",verbs="*",namespace=devopsbeerer-*
 
