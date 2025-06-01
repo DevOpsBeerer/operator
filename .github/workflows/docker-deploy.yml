@@ -50,18 +50,6 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
-      - name: Run Trivy image scan
-        run: |
-          echo "🔒 Scanning Docker image for security vulnerabilities..."
-          trivy image --exit-code 0 --severity HIGH,CRITICAL security-scan:latest || echo "⚠️ Image security scan failed but continuing pipeline..."
-
-      - name: Generate security summary
-        run: |
-          echo "## 🛡️ Security Scan Summary" >> $GITHUB_STEP_SUMMARY
-          echo "⚠️ Dockerfile linting executed (warnings allowed)" >> $GITHUB_STEP_SUMMARY
-          echo "⚠️ Filesystem security scan executed (warnings allowed)" >> $GITHUB_STEP_SUMMARY
-          echo "⚠️ Image security scan executed (warnings allowed)" >> $GITHUB_STEP_SUMMARY
-
   build-and-push:
     name: CI - Build and Push
     runs-on: ubuntu-latest
