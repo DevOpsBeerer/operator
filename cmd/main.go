@@ -34,6 +34,7 @@ import (
 
 	devopsbeererv1alpha1 "github.com/devopsbeerer/operator/api/v1alpha1"
 	"github.com/devopsbeerer/operator/controllers"
+	"github.com/devopsbeerer/operator/internal/helm"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -89,9 +90,18 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Initialize Helm client
+	helmClient, err := helm.NewClient()
+	if err != nil {
+		setupLog.Error(err, "unable to create helm client")
+		setupLog.Info("Helm operations will be disabled")
+		helmClient = nil
+	}
+
 	if err = (&controllers.ActiveScenarioReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
+		Client:     mgr.GetClient(),
+		Scheme:     mgr.GetScheme(),
+		HelmClient: helmClient,
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "ActiveScenario")
 		os.Exit(1)
@@ -112,4 +122,5 @@ func main() {
 		setupLog.Error(err, "problem running manager")
 		os.Exit(1)
 	}
+
 }

@@ -1,0 +1,40 @@
+# Default values for devopsbeerer-operator.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+replicaCount: 1
+
+image:
+  repository: rg.fr-par.scw.cloud/devopsbeerer/operator
+  pullPolicy: Always
+  tag: latest
+
+serviceAccount:
+  create: true
+  automount: true
+
+podSecurityContext:
+  fsGroup: 65532
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 65532
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "250Mi"
+  limits:
+    memory: "500Mi"
+    cpu: "1"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
