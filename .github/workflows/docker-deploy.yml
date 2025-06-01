@@ -35,8 +35,9 @@ jobs:
           context: .
           push: false
           tags: security-scan:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+          cache-from: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache
+          cache-to: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache,mode=max
           outputs: type=docker
 
       - name: Run Trivy vulnerability scanner
@@ -98,12 +99,14 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
+          cache-from: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache
+          cache-to: type=registry,ref=rg.fr-par.scw.cloud/devopsbeerer/operator:buildcache,mode=max
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          provenance: false
+          sbom: false
 
       - name: Generate build summary
         run: |
