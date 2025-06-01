@@ -1,0 +1,47 @@
+# Git files
+.git/
+.gitignore
+
+# Documentation
+*.md
+docs/
+LICENSE
+
+# Build artifacts
+bin/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test files
+*_test.go
+*.test
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Kubernetes manifests (not needed in image)
+config/
+deploy/
+manifests/
+
+# CI/CD files
+.github/
+.gitlab-ci.yml
+.drone.yml
+
+# Local development
+.env
+.env.local
+Makefile
+hack/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
