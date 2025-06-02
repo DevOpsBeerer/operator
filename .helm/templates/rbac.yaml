@@ -7,14 +7,14 @@ metadata:
     "helm.sh/hook-weight": "-5"
 rules:
 - apiGroups: ["devopsbeerer.ch"]
-  resources: ["activescenarios"]
+  resources: ["activescenarios", "activescenarios/status"]
   verbs: ["watch", "get", "list", "update", "patch"]
 - apiGroups: ["devopsbeerer.ch"]
-  resources: ["scenariodefinitions"]
-  verbs: ["get", "list"]
+  resources: ["scenariodefinitions", "scenariodefinitions/status"]
+  verbs: ["watch", "get", "list"]
 - apiGroups: ["devopsbeerer.ch"]
-  resources: ["scenariohistories"]
-  verbs: ["get", "list", "create", "update", "patch", "delete"]
+  resources: ["scenariohistories", "scenariohistories/status"]
+  verbs: ["watch", "get", "list", "create", "update", "patch", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

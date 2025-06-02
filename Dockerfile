@@ -19,7 +19,14 @@ COPY internal/ internal/
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags '-extldflags "-static"' -o manager cmd/main.go
 
 # Final stage - using distroless for minimal attack surface
-FROM gcr.io/distroless/static:nonroot
+FROM docker.io/alpine:latest
+
+RUN apk add --no-cache \
+    git \
+    helm \
+    ca-certificates \
+    && addgroup -g 65532 -S nonroot \
+    && adduser -u 65532 -S nonroot -G nonroot
 
 WORKDIR /
 

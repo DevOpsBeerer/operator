@@ -17,14 +17,6 @@ serviceAccount:
 podSecurityContext:
   fsGroup: 65532
 
-securityContext:
-  capabilities:
-    drop:
-      - ALL
-  readOnlyRootFilesystem: true
-  runAsNonRoot: true
-  runAsUser: 65532
-
 resources:
   requests:
     cpu: "500m"
