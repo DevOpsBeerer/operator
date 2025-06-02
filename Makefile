@@ -4,4 +4,4 @@ generate:
 
 # Generate CRD manifests
 manifests:
-	controller-gen crd paths="./..." output:crd:artifacts:config=config/crd/bases
+	controller-gen crd paths="./..." output:crd:artifacts:config=.helm/templates/crds

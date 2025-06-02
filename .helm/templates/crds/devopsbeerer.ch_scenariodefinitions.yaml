@@ -1,0 +1,119 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: scenariodefinitions.devopsbeerer.ch
+spec:
+  group: devopsbeerer.ch
+  names:
+    kind: ScenarioDefinition
+    listKind: ScenarioDefinitionList
+    plural: scenariodefinitions
+    shortNames:
+    - scndef
+    - sd
+    singular: scenariodefinition
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.name
+      name: Name
+      type: string
+    - jsonPath: .spec.id
+      name: ID
+      type: string
+    - jsonPath: .spec.tags
+      name: Tags
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ScenarioDefinition is the Schema for the scenariodefinitions
+          API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ScenarioDefinitionSpec defines the desired state of ScenarioDefinition
+            properties:
+              description:
+                description: Description is the detailed description of the scenario
+                type: string
+              features:
+                description: Features is the list of features demonstrated in this
+                  scenario
+                example:
+                - authorization-code-flow
+                - refresh-tokens
+                - rbac
+                - api-gateway
+                items:
+                  type: string
+                type: array
+              helmChart:
+                description: HelmChart defines the helm chart configuration
+                properties:
+                  dir:
+                    description: Dir is the subdirectory containing the helm chart
+                      (optional, defaults to scenario ID)
+                    type: string
+                  link:
+                    default: https://github.com/DevOpsBeerer/playground-scenarios-charts.git
+                    description: Link is the Git repository URL for helm charts
+                    pattern: ^https://.*\.git$
+                    type: string
+                required:
+                - link
+                type: object
+              id:
+                description: ID is the unique identifier with hyphens
+                example: basic-oauth2-beer-mgmt
+                pattern: ^[a-z0-9]+(-[a-z0-9]+)*$
+                type: string
+              name:
+                description: Name is the human-readable name of the scenario
+                example: Basic OAuth2 Beer Management
+                type: string
+              tags:
+                description: Tags for categorizing scenarios
+                example:
+                - oauth2
+                - basic
+                - api
+                - crud
+                items:
+                  type: string
+                type: array
+            required:
+            - description
+            - helmChart
+            - id
+            - name
+            type: object
+          status:
+            description: ScenarioDefinitionStatus defines the observed state of ScenarioDefinition
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources: {}

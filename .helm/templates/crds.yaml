@@ -1,5 +1,5 @@
 # charts/operator/templates/crds.yaml
-{{- range $path, $_ := .Files.Glob "../config/crd/bases/*.yaml" }}
+{{- range $path, $_ := .Files.Glob "./crds/*.yaml" }}
 ---
 {{ $.Files.Get $path }}
 metadata:
